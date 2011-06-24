@@ -1,0 +1,18 @@
+Makefile
+Makefile.in
+moth/build/Makefile
+moth/build/Makefile.in
+whitewhale/build/Makefile
+whitewhale/build/Makefile.in
+aclocal.m4
+config.guess
+config.log
+config.status
+config.sub
+configure
+install-sh
+libtool
+ltmain.sh
+missing
+depcomp
+autom4te.cache/output.0 autom4te.cache/output.1 autom4te.cache/output.2 autom4te.cache/output.3 autom4te.cache/requests autom4te.cache/traces.0 autom4te.cache/traces.1 autom4te.cache/traces.2 autom4te.cache/traces.3
