@@ -2,7 +2,7 @@
  * Thread.h
  *
  *  Created on: 23/06/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #ifndef THREAD_H_

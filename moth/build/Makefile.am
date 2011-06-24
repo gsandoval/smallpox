@@ -1,60 +1,18 @@
-SRCDIR=$(srcdir)src
+AM_CPPFLAGS=-I../include/
 
-noinst_LTLIBRARIES=libmothio.la
-libmothio_la_SOURCES=$(SRCDIR)/mothio/File.cpp
+SRCDIR=../src
 
-# Primaries
-# PROGRAMS
-# LIBRARIES
-# PYTHON
-# JAVA
-# SCRIPTS
-# DATA
-# HEADERS
-# MANS
-# TEXINFOS
-# LTLIBRARIES
+IODIR=$(SRCDIR)/mothio
+NETDIR=$(SRCDIR)/mothnet
+LOGDIR=$(SRCDIR)/mothlog
+THREADDIR=$(SRCDIR)/moththread
 
-# Prefixes
-# bindir
-# sbindir
-# libexecdir
-# datarootdir
-# datadir
-# sysconfdir
-# sharedstatedir
-# localstatedir
-# includedir
-# oldincludedir
-# docdir
-# infodir
-# htmldir
-# dvidir
-# pdfdir
-# psdir
-# libdir
-# lispdir
-# localedir
-# mandir
-# manNdir
-# pkglibdir
-# pkgincludedir
-# pkgdatadir
+noinst_LTLIBRARIES=libmothio.la libmothnet.la libmoththread.la libmothlog.la
 
-# check
-# noinst
-# EXTRA
+libmothio_la_SOURCES=$(IODIR)/File.cpp
 
-# Super prefixes
-# dist
-# nodist
-# nobase
+libmothnet_la_SOURCES=$(NETDIR)/Socket.cpp
 
-# Adding static libraries
-# library_LIBADD
-# program_LDADD
+libmoththread_la_SOURCES=$(THREADDIR)/Thread.cpp
 
-# AM_CPPFLAGS or AM_LDFLAGS
-# program_CPPFLAGS or program_LDFLAGS
-
-# EXTRA_DIST = windows
+libmothlog_la_SOURCES=$(LOGDIR)/Logger.cpp

@@ -2,10 +2,10 @@
  * Logger.cpp
  *
  *  Created on: 23/06/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include "Logger.h"
+#include <mothlog/Logger.h>
 
 namespace moth {
 

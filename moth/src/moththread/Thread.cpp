@@ -2,10 +2,10 @@
  * Thread.cpp
  *
  *  Created on: 23/06/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include "Thread.h"
+#include <moththread/Thread.h>
 
 namespace moth {
 

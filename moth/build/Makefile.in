@@ -51,6 +51,15 @@ LTLIBRARIES = $(noinst_LTLIBRARIES)
 libmothio_la_LIBADD =
 am_libmothio_la_OBJECTS = File.lo
 libmothio_la_OBJECTS = $(am_libmothio_la_OBJECTS)
+libmothlog_la_LIBADD =
+am_libmothlog_la_OBJECTS = Logger.lo
+libmothlog_la_OBJECTS = $(am_libmothlog_la_OBJECTS)
+libmothnet_la_LIBADD =
+am_libmothnet_la_OBJECTS = Socket.lo
+libmothnet_la_OBJECTS = $(am_libmothnet_la_OBJECTS)
+libmoththread_la_LIBADD =
+am_libmoththread_la_OBJECTS = Thread.lo
+libmoththread_la_OBJECTS = $(am_libmoththread_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -64,8 +73,10 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libmothio_la_SOURCES)
-DIST_SOURCES = $(libmothio_la_SOURCES)
+SOURCES = $(libmothio_la_SOURCES) $(libmothlog_la_SOURCES) \
+	$(libmothnet_la_SOURCES) $(libmoththread_la_SOURCES)
+DIST_SOURCES = $(libmothio_la_SOURCES) $(libmothlog_la_SOURCES) \
+	$(libmothnet_la_SOURCES) $(libmoththread_la_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -88,7 +99,6 @@ CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
@@ -112,7 +122,6 @@ LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
-MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -138,7 +147,6 @@ abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
@@ -172,6 +180,7 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
+lt_ECHO = @lt_ECHO@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
@@ -191,9 +200,17 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SRCDIR = $(srcdir)src
-noinst_LTLIBRARIES = libmothio.la
-libmothio_la_SOURCES = $(SRCDIR)/mothio/File.cpp
+AM_CPPFLAGS = -I../include/
+SRCDIR = ../src
+IODIR = $(SRCDIR)/mothio
+NETDIR = $(SRCDIR)/mothnet
+LOGDIR = $(SRCDIR)/mothlog
+THREADDIR = $(SRCDIR)/moththread
+noinst_LTLIBRARIES = libmothio.la libmothnet.la libmoththread.la libmothlog.la
+libmothio_la_SOURCES = $(IODIR)/File.cpp
+libmothnet_la_SOURCES = $(NETDIR)/Socket.cpp
+libmoththread_la_SOURCES = $(THREADDIR)/Thread.cpp
+libmothlog_la_SOURCES = $(LOGDIR)/Logger.cpp
 all: all-am
 
 .SUFFIXES:
@@ -239,6 +256,12 @@ clean-noinstLTLIBRARIES:
 	done
 libmothio.la: $(libmothio_la_OBJECTS) $(libmothio_la_DEPENDENCIES) 
 	$(CXXLINK)  $(libmothio_la_OBJECTS) $(libmothio_la_LIBADD) $(LIBS)
+libmothlog.la: $(libmothlog_la_OBJECTS) $(libmothlog_la_DEPENDENCIES) 
+	$(CXXLINK)  $(libmothlog_la_OBJECTS) $(libmothlog_la_LIBADD) $(LIBS)
+libmothnet.la: $(libmothnet_la_OBJECTS) $(libmothnet_la_DEPENDENCIES) 
+	$(CXXLINK)  $(libmothnet_la_OBJECTS) $(libmothnet_la_LIBADD) $(LIBS)
+libmoththread.la: $(libmoththread_la_OBJECTS) $(libmoththread_la_DEPENDENCIES) 
+	$(CXXLINK)  $(libmoththread_la_OBJECTS) $(libmoththread_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -247,6 +270,9 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/File.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Logger.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Socket.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Thread.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -269,12 +295,33 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
 
-File.lo: $(SRCDIR)/mothio/File.cpp
-@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT File.lo -MD -MP -MF $(DEPDIR)/File.Tpo -c -o File.lo `test -f '$(SRCDIR)/mothio/File.cpp' || echo '$(srcdir)/'`$(SRCDIR)/mothio/File.cpp
+File.lo: $(IODIR)/File.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT File.lo -MD -MP -MF $(DEPDIR)/File.Tpo -c -o File.lo `test -f '$(IODIR)/File.cpp' || echo '$(srcdir)/'`$(IODIR)/File.cpp
 @am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/File.Tpo $(DEPDIR)/File.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(SRCDIR)/mothio/File.cpp' object='File.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(IODIR)/File.cpp' object='File.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o File.lo `test -f '$(SRCDIR)/mothio/File.cpp' || echo '$(srcdir)/'`$(SRCDIR)/mothio/File.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o File.lo `test -f '$(IODIR)/File.cpp' || echo '$(srcdir)/'`$(IODIR)/File.cpp
+
+Logger.lo: $(LOGDIR)/Logger.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Logger.lo -MD -MP -MF $(DEPDIR)/Logger.Tpo -c -o Logger.lo `test -f '$(LOGDIR)/Logger.cpp' || echo '$(srcdir)/'`$(LOGDIR)/Logger.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Logger.Tpo $(DEPDIR)/Logger.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(LOGDIR)/Logger.cpp' object='Logger.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Logger.lo `test -f '$(LOGDIR)/Logger.cpp' || echo '$(srcdir)/'`$(LOGDIR)/Logger.cpp
+
+Socket.lo: $(NETDIR)/Socket.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Socket.lo -MD -MP -MF $(DEPDIR)/Socket.Tpo -c -o Socket.lo `test -f '$(NETDIR)/Socket.cpp' || echo '$(srcdir)/'`$(NETDIR)/Socket.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Socket.Tpo $(DEPDIR)/Socket.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(NETDIR)/Socket.cpp' object='Socket.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Socket.lo `test -f '$(NETDIR)/Socket.cpp' || echo '$(srcdir)/'`$(NETDIR)/Socket.cpp
+
+Thread.lo: $(THREADDIR)/Thread.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Thread.lo -MD -MP -MF $(DEPDIR)/Thread.Tpo -c -o Thread.lo `test -f '$(THREADDIR)/Thread.cpp' || echo '$(srcdir)/'`$(THREADDIR)/Thread.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Thread.Tpo $(DEPDIR)/Thread.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$(THREADDIR)/Thread.cpp' object='Thread.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Thread.lo `test -f '$(THREADDIR)/Thread.cpp' || echo '$(srcdir)/'`$(THREADDIR)/Thread.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -479,62 +526,6 @@ uninstall-am:
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am tags uninstall uninstall-am
 
-
-# Primaries
-# PROGRAMS
-# LIBRARIES
-# PYTHON
-# JAVA
-# SCRIPTS
-# DATA
-# HEADERS
-# MANS
-# TEXINFOS
-# LTLIBRARIES
-
-# Prefixes
-# bindir
-# sbindir
-# libexecdir
-# datarootdir
-# datadir
-# sysconfdir
-# sharedstatedir
-# localstatedir
-# includedir
-# oldincludedir
-# docdir
-# infodir
-# htmldir
-# dvidir
-# pdfdir
-# psdir
-# libdir
-# lispdir
-# localedir
-# mandir
-# manNdir
-# pkglibdir
-# pkgincludedir
-# pkgdatadir
-
-# check
-# noinst
-# EXTRA
-
-# Super prefixes
-# dist
-# nodist
-# nobase
-
-# Adding static libraries
-# library_LIBADD
-# program_LDADD
-
-# AM_CPPFLAGS or AM_LDFLAGS
-# program_CPPFLAGS or program_LDFLAGS
-
-# EXTRA_DIST = windows
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

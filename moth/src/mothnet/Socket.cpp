@@ -2,10 +2,10 @@
  * Socket.cpp
  *
  *  Created on: 23/06/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include "Socket.h"
+#include <mothnet/Socket.h>
 
 namespace moth {
 
