@@ -1,6 +1,7 @@
-bin_PROGRAMS=a.out
-a_out_SOURCES=smallpox.cpp
+SRCDIR=$(srcdir)src
 
+noinst_LTLIBRARIES=libmothio.la
+libmothio_la_SOURCES=$(SRCDIR)/mothio/File.cpp
 
 # Primaries
 # PROGRAMS
