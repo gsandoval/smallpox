@@ -8,12 +8,25 @@
 #ifndef FILE_H_
 #define FILE_H_
 
+#include <string>
+
+using namespace std;
+
 namespace moth {
 
 class File {
 public:
-	File();
+	File(string filename);
 	virtual ~File();
+	void open();
+	void close();
+	string readLine();
+	bool hasMoreLines();
+	char readChar();
+	bool hasMoreChars();
+private:
+	string filename;
+	fstream* file;
 };
 
 } /* namespace moth */

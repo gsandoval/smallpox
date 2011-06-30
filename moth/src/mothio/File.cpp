@@ -7,15 +7,38 @@
 
 #include <mothio/File.h>
 
+#include <fstream>
+
 namespace moth {
 
-File::File() {
-	// TODO Auto-generated constructor stub
-
+File::File(string _filename) : filename(_filename) {
 }
 
 File::~File() {
-	// TODO Auto-generated destructor stub
+}
+
+void File::open() {
+
+}
+
+void File::close() {
+
+}
+
+string File::readLine() {
+
+}
+
+bool File::hasMoreLines() {
+
+}
+
+char File::readChar() {
+
+}
+
+bool File::hasMoreChars() {
+
 }
 
 } /* namespace moth */
