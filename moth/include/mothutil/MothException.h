@@ -9,7 +9,6 @@
 #define MOTHEXCEPTION_H_
 
 #include <exception>
-
 #include <string>
 
 using namespace std;
@@ -18,13 +17,13 @@ namespace moth {
 
 class MothException: public std::exception {
 public:
-	MothException(string message, int lineNumber);
+	MothException(string message, int line_number);
 	virtual ~MothException() throw();
 	virtual const char* what() const throw();
-	int lineNumber();
+	int LineNumber();
 private:
-	string msg;
-	int line;
+	string message;
+	int line_number;
 };
 
 } /* namespace moth */

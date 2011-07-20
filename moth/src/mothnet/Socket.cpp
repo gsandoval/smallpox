@@ -5,7 +5,7 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothnet/Socket.h>
+#include <mothnet/socket.h>
 
 namespace moth {
 

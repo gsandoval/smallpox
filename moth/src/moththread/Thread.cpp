@@ -5,7 +5,7 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <moththread/Thread.h>
+#include <moththread/thread.h>
 
 namespace moth {
 

@@ -10,6 +10,8 @@
 
 #include <string>
 
+#include <mothlog/logger.h>
+
 using namespace std;
 
 namespace moth {
@@ -18,7 +20,7 @@ class LoggerFactory {
 public:
 	LoggerFactory();
 	virtual ~LoggerFactory();
-	Logger* createLogger(string className);
+	static Logger* CreateLogger(string classname);
 };
 
 } /* namespace moth */

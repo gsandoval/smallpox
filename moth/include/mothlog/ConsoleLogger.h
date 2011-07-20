@@ -8,22 +8,22 @@
 #ifndef CONSOLE_LOGGER_H_
 #define CONSOLE_LOGGER_H_
 
-#include <mothlog/Logger.h>
+#include <mothlog/logger.h>
 
 namespace moth {
 
 class ConsoleLogger : public Logger {
 public:
-	ConsoleLogger(string className);
+	ConsoleLogger(string classname);
 	virtual ~ConsoleLogger();
-	virtual void info(string msg);
-	virtual void info(string msg, MothException& e);
-	virtual void debug(string msg);
-	virtual void debug(string msg, MothException& e);
-	virtual void warn(string msg);
-	virtual void warn(string msg, MothException& e);
-	virtual void error(string msg);
-	virtual void error(string msg, MothException& e);
+	virtual void Info(string msg);
+	virtual void Info(string msg, MothException* e);
+	virtual void Debug(string msg);
+	virtual void Debug(string msg, MothException* e);
+	virtual void Warn(string msg);
+	virtual void Warn(string msg, MothException* e);
+	virtual void Error(string msg);
+	virtual void Error(string msg, MothException* e);
 };
 
 } /* namespace moth */

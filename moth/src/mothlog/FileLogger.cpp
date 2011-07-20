@@ -5,46 +5,47 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothlog/FileLogger.h>
+#include <mothlog/filelogger.h>
+#include <mothutil/mothexception.h>
 
 namespace moth {
 
-FileLogger::FileLogger(string _className) : className(_className) {
+FileLogger::FileLogger(string classname) : Logger(classname) {
 
 }
 
 FileLogger::~FileLogger() {
 }
 
-void FileLogger::error(string msg) {
+void FileLogger::Error(string msg) {
 
 }
 
-void FileLogger::error(string msg, MothException& e) {
+void FileLogger::Error(string msg, MothException* e) {
 
 }
 
-void FileLogger::warn(string msg) {
+void FileLogger::Warn(string msg) {
 
 }
 
-void FileLogger::warn(string msg, MothException& e) {
+void FileLogger::Warn(string msg, MothException* e) {
 
 }
 
-void FileLogger::debug(string msg) {
+void FileLogger::Debug(string msg) {
 
 }
 
-void FileLogger::debug(string msg, MothException& e) {
+void FileLogger::Debug(string msg, MothException* e) {
 
 }
 
-void FileLogger::info(string msg) {
+void FileLogger::Info(string msg) {
 
 }
 
-void FileLogger::info(string msg, MothException& e) {
+void FileLogger::Info(string msg, MothException* e) {
 
 }
 

@@ -19,18 +19,18 @@ class Properties {
 public:
 	Properties(string filename);
 	virtual ~Properties();
-	string get(string key, string def = "");
-	int getInt(string key, int def = 0);
-	double getDouble(string key, double def = 0.0);
-	long long getLong(string key, long long def = 0);
-	char getChar(string key, char def = 0);
-	bool getBool(string key, bool def = false);
+	string Get(string key, string def = "");
+	int GetInt(string key, int def = 0);
+	double GetDouble(string key, double def = 0.0);
+	long long GetLong(string key, long long def = 0);
+	char GetChar(string key, char def = 0);
+	bool GetBool(string key, bool def = false);
 
 private:
 	map<string, string> properties;
 	string filename;
 
-	void loadProperties();
+	void LoadProperties();
 };
 
 } /* namespace moth */

@@ -5,7 +5,10 @@
  *      Author: darchitect
  */
 
-#include <mothlog/LoggerFactory.h>
+#include <mothlog/loggerfactory.h>
+#include <mothlog/consolelogger.h>
+#include <mothlog/filelogger.h>
+#include <mothlog/filerollerlogger.h>
 
 namespace moth {
 
@@ -16,8 +19,8 @@ LoggerFactory::LoggerFactory() {
 LoggerFactory::~LoggerFactory() {
 }
 
-Logger* LoggerFactory::createLogger(string className) {
-	return NULL;
+Logger* LoggerFactory::CreateLogger(string classname) {
+	return new ConsoleLogger(classname);
 }
 
 } /* namespace moth */

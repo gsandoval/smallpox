@@ -19,12 +19,12 @@ class Tokenizer {
 public:
 	Tokenizer(string str, string delim = " ");
 	virtual ~Tokenizer();
-	bool hasMoreTokens();
-	size_t tokenCount();
-	string nextToken();
+	bool HasMoreTokens();
+	size_t TokenCount();
+	string NextToken();
 private:
 	vector<string> tokens;
-	size_t currToken;
+	size_t curr_token;
 };
 
 } /* namespace moth */

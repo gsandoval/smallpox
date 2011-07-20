@@ -10,15 +10,19 @@ THREADDIR=$(SRCDIR)/moththread
 
 noinst_LTLIBRARIES=libmothutil.la libmothnet.la libmoththread.la libmothlog.la
 
-bin_PROGRAMS=util
+bin_PROGRAMS=util log
 
-libmothutil_la_SOURCES=$(UTILDIR)/Tokenizer.cpp $(UTILDIR)/Properties.cpp $(UTILDIR)/MothException.cpp
+libmothutil_la_SOURCES=$(UTILDIR)/tokenizer.cpp $(UTILDIR)/properties.cpp $(UTILDIR)/mothexception.cpp
 
-libmothnet_la_SOURCES=$(NETDIR)/Socket.cpp
+libmothnet_la_SOURCES=$(NETDIR)/socket.cpp
 
-libmoththread_la_SOURCES=$(THREADDIR)/Thread.cpp
+libmoththread_la_SOURCES=$(THREADDIR)/thread.cpp
 
-libmothlog_la_SOURCES=$(LOGDIR)/ConsoleLogger.cpp $(LOGDIR)/FileLogger.cpp $(LOGDIR)/FileRollerLogger.cpp $(LOGDIR)/LoggerFactory.cpp
+libmothlog_la_SOURCES=$(LOGDIR)/logger.cpp $(LOGDIR)/consolelogger.cpp $(LOGDIR)/filelogger.cpp $(LOGDIR)/filerollerlogger.cpp $(LOGDIR)/loggerfactory.cpp
+libmothlog_la_LIBADD=libmothutil.la
 
-util_SOURCES=$(SRCDIR)/test/Util.cpp
+util_SOURCES=$(SRCDIR)/test/util.cpp
 util_LDADD=libmothutil.la libmothnet.la libmoththread.la libmothlog.la
+
+log_SOURCES=$(SRCDIR)/test/log.cpp
+log_LDADD=libmothutil.la libmothnet.la libmoththread.la libmothlog.la

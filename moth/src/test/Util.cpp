@@ -5,18 +5,18 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothutil/Properties.h>
+#include <mothutil/properties.h>
 
 #include <iostream>
 
 int main(int argc, char* argv[]) {
 	moth::Properties p("test.properties");
-	cout << "str: " << p.get("testStr") << endl;
-	cout << "str: " << p.get("testStr1") << endl;
-	cout << "double: " << p.getDouble("testDouble") << endl;
-	cout << "bool: " << boolalpha << p.getBool("testBool") << endl;
-	cout << "bool: " << boolalpha << p.getBool("testBool1") << endl;
-	cout << "int: " << p.getInt("testBool1") << endl;
+	cout << "str: " << p.Get("testStr") << endl;
+	cout << "str: " << p.Get("testStr1") << endl;
+	cout << "double: " << p.GetDouble("testDouble") << endl;
+	cout << "bool: " << boolalpha << p.GetBool("testBool") << endl;
+	cout << "bool: " << boolalpha << p.GetBool("testBool1") << endl;
+	cout << "int: " << p.GetInt("testBool1") << endl;
 	return 0;
 }
 

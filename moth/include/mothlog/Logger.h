@@ -8,28 +8,30 @@
 #ifndef LOGGER_H_
 #define LOGGER_H_
 
-#include <mothutil/MothException>
-
 #include <string>
 
 using namespace std;
 
 namespace moth {
 
+class MothException;
+
 class Logger {
 public:
-	Logger(string className);
+	Logger(string classname);
 	virtual ~Logger();
-	virtual void info(string msg) = 0;
-	virtual void info(string msg, MothException& e) = 0;
-	virtual void debug(string msg) = 0;
-	virtual void debug(string msg, MothException& e) = 0;
-	virtual void warn(string msg) = 0;
-	virtual void warn(string msg, MothException& e) = 0;
-	virtual void error(string msg) = 0;
-	virtual void error(string msg, MothException& e) = 0;
+	virtual void Info(string msg) = 0;
+	virtual void Info(string msg, MothException* e) = 0;
+	virtual void Debug(string msg) = 0;
+	virtual void Debug(string msg, MothException* e) = 0;
+	virtual void Warn(string msg) = 0;
+	virtual void Warn(string msg, MothException* e) = 0;
+	virtual void Error(string msg) = 0;
+	virtual void Error(string msg, MothException* e) = 0;
 protected:
-	string className;
+	string classname;
+
+	virtual string DateTime();
 };
 
 } /* namespace moth */

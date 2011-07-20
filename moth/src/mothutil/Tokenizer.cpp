@@ -9,7 +9,7 @@
 
 namespace moth {
 
-Tokenizer::Tokenizer(string line, string delim) : currToken(0) {
+Tokenizer::Tokenizer(string line, string delim) : curr_token(0) {
 	size_t start = 0, end = 0;
 	while (end != string::npos) {
 		end = string::npos;
@@ -32,16 +32,16 @@ Tokenizer::Tokenizer(string line, string delim) : currToken(0) {
 Tokenizer::~Tokenizer() {
 }
 
-bool Tokenizer::hasMoreTokens() {
-	return (tokens.size() - currToken) > 0;
+bool Tokenizer::HasMoreTokens() {
+	return (tokens.size() - curr_token) > 0;
 }
 
-size_t Tokenizer::tokenCount() {
+size_t Tokenizer::TokenCount() {
 	return tokens.size();
 }
 
-string Tokenizer::nextToken() {
-	return tokens[currToken++];
+string Tokenizer::NextToken() {
+	return tokens[curr_token++];
 }
 
 } /* namespace moth */

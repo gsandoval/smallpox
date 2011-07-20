@@ -5,46 +5,47 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothlog/FileRollerLogger.h>
+#include <mothlog/filerollerlogger.h>
+#include <mothutil/mothexception.h>
 
 namespace moth {
 
-FileRollerLogger::FileRollerLogger(string _className) : className(_className) {
+FileRollerLogger::FileRollerLogger(string classname) : Logger(classname) {
 
 }
 
 FileRollerLogger::~FileRollerLogger() {
 }
 
-void FileRollerLogger::error(string msg) {
+void FileRollerLogger::Error(string msg) {
 
 }
 
-void FileRollerLogger::error(string msg, MothException& e) {
+void FileRollerLogger::Error(string msg, MothException* e) {
 
 }
 
-void FileRollerLogger::warn(string msg) {
+void FileRollerLogger::Warn(string msg) {
 
 }
 
-void FileRollerLogger::warn(string msg, MothException& e) {
+void FileRollerLogger::Warn(string msg, MothException* e) {
 
 }
 
-void FileRollerLogger::debug(string msg) {
+void FileRollerLogger::Debug(string msg) {
 
 }
 
-void FileRollerLogger::debug(string msg, MothException& e) {
+void FileRollerLogger::Debug(string msg, MothException* e) {
 
 }
 
-void FileRollerLogger::info(string msg) {
+void FileRollerLogger::Info(string msg) {
 
 }
 
-void FileRollerLogger::info(string msg, MothException& e) {
+void FileRollerLogger::Info(string msg, MothException* e) {
 
 }
 
