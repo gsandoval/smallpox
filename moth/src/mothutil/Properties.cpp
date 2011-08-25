@@ -5,12 +5,12 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothutil/properties.h>
-#include <mothutil/tokenizer.h>
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+#include <mothutil/properties.h>
+#include <mothutil/tokenizer.h>
 
 namespace moth {
 

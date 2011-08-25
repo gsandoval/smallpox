@@ -10,10 +10,20 @@
 
 namespace moth {
 
+class Runnable;
+
 class Thread {
 public:
 	Thread();
+	Thread(Runnable *runnable);
 	virtual ~Thread();
+	void Start();
+
+protected:
+	virtual void Run();
+
+private:
+	Runnable* runnable;
 };
 
 } /* namespace moth */

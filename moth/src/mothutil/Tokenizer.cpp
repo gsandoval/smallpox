@@ -5,7 +5,7 @@
  *      Author: darchitect
  */
 
-#include <mothutil/Tokenizer.h>
+#include <mothutil/tokenizer.h>
 
 namespace moth {
 

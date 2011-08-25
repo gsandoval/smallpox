@@ -9,8 +9,10 @@
 
 namespace moth {
 
+Thread::Thread() :  {
+}
+
 Thread::Thread() {
-	// TODO Auto-generated constructor stub
 
 }
 
