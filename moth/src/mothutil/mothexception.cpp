@@ -17,11 +17,11 @@ MothException::~MothException() throw() {
 }
 
 const char* MothException::what() const throw() {
-	return message.c_str();
+    return message.c_str();
 }
 
 int MothException::LineNumber() {
-	return line_number;
+    return line_number;
 }
 
 } /* namespace moth */

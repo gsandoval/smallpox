@@ -17,20 +17,20 @@ namespace moth {
 
 class Properties {
 public:
-	Properties(string filename);
-	virtual ~Properties();
-	string Get(string key, string def = "");
-	int GetInt(string key, int def = 0);
-	double GetDouble(string key, double def = 0.0);
-	long long GetLong(string key, long long def = 0);
-	char GetChar(string key, char def = 0);
-	bool GetBool(string key, bool def = false);
+    Properties(string filename);
+    virtual ~Properties();
+    string Get(string key, string def = "");
+    int GetInt(string key, int def = 0);
+    double GetDouble(string key, double def = 0.0);
+    long long GetLong(string key, long long def = 0);
+    char GetChar(string key, char def = 0);
+    bool GetBool(string key, bool def = false);
 
 private:
-	map<string, string> properties;
-	string filename;
+    map<string, string> properties;
+    string filename;
 
-	void LoadProperties();
+    void LoadProperties();
 };
 
 } /* namespace moth */

@@ -18,9 +18,9 @@ namespace moth {
 
 class LoggerFactory {
 public:
-	LoggerFactory();
-	virtual ~LoggerFactory();
-	static Logger* CreateLogger(string classname);
+    LoggerFactory();
+    virtual ~LoggerFactory();
+    static Logger* CreateLogger(string classname);
 };
 
 } /* namespace moth */

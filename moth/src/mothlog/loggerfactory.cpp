@@ -20,7 +20,7 @@ LoggerFactory::~LoggerFactory() {
 }
 
 Logger* LoggerFactory::CreateLogger(string classname) {
-	return new ConsoleLogger(classname);
+    return new ConsoleLogger(classname);
 }
 
 } /* namespace moth */

@@ -18,7 +18,7 @@ Thread::Thread(Runnable *r) {
 }
 
 Thread::~Thread() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 } /* namespace moth */

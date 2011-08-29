@@ -18,20 +18,20 @@ class MothException;
 
 class Logger {
 public:
-	Logger(string classname);
-	virtual ~Logger();
-	virtual void Info(string msg) = 0;
-	virtual void Info(string msg, MothException* e) = 0;
-	virtual void Debug(string msg) = 0;
-	virtual void Debug(string msg, MothException* e) = 0;
-	virtual void Warn(string msg) = 0;
-	virtual void Warn(string msg, MothException* e) = 0;
-	virtual void Error(string msg) = 0;
-	virtual void Error(string msg, MothException* e) = 0;
+    Logger(string classname);
+    virtual ~Logger();
+    virtual void Info(string msg) = 0;
+    virtual void Info(string msg, MothException* e) = 0;
+    virtual void Debug(string msg) = 0;
+    virtual void Debug(string msg, MothException* e) = 0;
+    virtual void Warn(string msg) = 0;
+    virtual void Warn(string msg, MothException* e) = 0;
+    virtual void Error(string msg) = 0;
+    virtual void Error(string msg, MothException* e) = 0;
 protected:
-	string classname;
+    string classname;
 
-	virtual string DateTime();
+    virtual string DateTime();
 };
 
 } /* namespace moth */
