@@ -7,3 +7,5 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 cmake_install.cmake
+moth/bin
+moth/lib

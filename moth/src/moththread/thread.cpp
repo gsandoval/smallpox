@@ -6,13 +6,14 @@
  */
 
 #include <moththread/thread.h>
+#include <moththread/runnable.h>
 
 namespace moth {
 
-Thread::Thread() :  {
+Thread::Thread()  {
 }
 
-Thread::Thread() {
+Thread::Thread(Runnable *r) {
 
 }
 

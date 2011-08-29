@@ -20,7 +20,7 @@ public:
 	void Start();
 
 protected:
-	virtual void Run();
+        virtual void Run() = 0;
 
 private:
 	Runnable* runnable;
