@@ -14,16 +14,16 @@ namespace moth {
 
 class FileLogger : public Logger {
 public:
-    FileLogger(string classname);
-    virtual ~FileLogger();
-    virtual void Info(string msg);
-    virtual void Info(string msg, MothException* e);
-    virtual void Debug(string msg);
-    virtual void Debug(string msg, MothException* e);
-    virtual void Warn(string msg);
-    virtual void Warn(string msg, MothException* e);
-    virtual void Error(string msg);
-    virtual void Error(string msg, MothException* e);
+	FileLogger(string classname);
+	virtual ~FileLogger();
+	virtual void Info(string msg);
+	virtual void Info(string msg, MothException* e);
+	virtual void Debug(string msg);
+	virtual void Debug(string msg, MothException* e);
+	virtual void Warn(string msg);
+	virtual void Warn(string msg, MothException* e);
+	virtual void Error(string msg);
+	virtual void Error(string msg, MothException* e);
 };
 
 } /* namespace moth */

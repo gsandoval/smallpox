@@ -6,19 +6,18 @@
  */
 
 #include <moththread/thread.h>
-#include <moththread/runnable.h>
 
 namespace moth {
 
-Thread::Thread() {
+Thread::Thread() :  {
 }
 
-Thread::Thread(Runnable *runnable) {
+Thread::Thread() {
 
 }
 
 Thread::~Thread() {
-    // TODO Auto-generated destructor stub
+	// TODO Auto-generated destructor stub
 }
 
 } /* namespace moth */

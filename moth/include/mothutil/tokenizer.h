@@ -10,32 +10,22 @@
 
 #include <string>
 #include <vector>
-#include <iterator>
+
+using namespace std;
 
 namespace moth {
 
 class Tokenizer {
-
 public:
-    class iterator : std::iterator<std::input_iterator_tag, std::string> {
-    private:
-        std::vector<std::string>::iterator it;
-    public:
-        iterator(std::vector<std::string>::iterator it);
-        iterator(const iterator& it);
-        iterator& operator++();
-        iterator operator++(int);
-        bool operator==(const iterator& rhs);
-        bool operator!=(const iterator& rhs);
-        std::string& operator*();
-    };
-
-    Tokenizer(std::string str, std::string delim = " ");
-    virtual ~Tokenizer();
-    iterator begin();
-    iterator end();
+	Tokenizer(string str, string delim = " ");
+	virtual ~Tokenizer();
+	bool HasMoreTokens();
+	size_t TokenCount();
+	string NextToken();
 private:
-    std::vector<std::string> tokens;
+	vector<string> tokens;
+	size_t curr_token;
 };
+
 } /* namespace moth */
 #endif /* TOKENIZER_H_ */

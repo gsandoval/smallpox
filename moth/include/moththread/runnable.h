@@ -12,8 +12,8 @@ namespace moth {
 
 class Runnable {
 public:
-    Runnable();
-    virtual ~Runnable();
+	Runnable();
+	virtual ~Runnable();
 };
 
 } /* namespace moth */

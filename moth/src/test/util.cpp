@@ -10,13 +10,13 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-    moth::Properties p("test.properties");
-    cout << "str: " << p.Get("testStr") << endl;
-    cout << "str: " << p.Get("testStr1") << endl;
-    cout << "double: " << p.GetDouble("testDouble") << endl;
-    cout << "bool: " << boolalpha << p.GetBool("testBool") << endl;
-    cout << "bool: " << boolalpha << p.GetBool("testBool1") << endl;
-    cout << "int: " << p.GetInt("testBool1") << endl;
-    return 0;
+	moth::Properties p("test.properties");
+	cout << "str: " << p.Get("testStr") << endl;
+	cout << "str: " << p.Get("testStr1") << endl;
+	cout << "double: " << p.GetDouble("testDouble") << endl;
+	cout << "bool: " << boolalpha << p.GetBool("testBool") << endl;
+	cout << "bool: " << boolalpha << p.GetBool("testBool1") << endl;
+	cout << "int: " << p.GetInt("testBool1") << endl;
+	return 0;
 }
 

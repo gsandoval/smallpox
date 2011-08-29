@@ -14,16 +14,16 @@ class Runnable;
 
 class Thread {
 public:
-    Thread();
-    Thread(Runnable *runnable);
-    virtual ~Thread();
-    void Start();
+	Thread();
+	Thread(Runnable *runnable);
+	virtual ~Thread();
+	void Start();
 
 protected:
-    virtual void Run() = 0;
+	virtual void Run();
 
 private:
-    Runnable* runnable;
+	Runnable* runnable;
 };
 
 } /* namespace moth */

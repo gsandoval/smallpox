@@ -17,13 +17,13 @@ namespace moth {
 
 class MothException: public std::exception {
 public:
-    MothException(string message, int line_number);
-    virtual ~MothException() throw();
-    virtual const char* what() const throw();
-    int LineNumber();
+	MothException(string message, int line_number);
+	virtual ~MothException() throw();
+	virtual const char* what() const throw();
+	int LineNumber();
 private:
-    string message;
-    int line_number;
+	string message;
+	int line_number;
 };
 
 } /* namespace moth */

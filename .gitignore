@@ -3,3 +3,7 @@ smallpox.creator
 smallpox.creator.user
 smallpox.files
 smallpox.includes
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake

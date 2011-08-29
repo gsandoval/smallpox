@@ -12,8 +12,8 @@ namespace moth {
 
 class Socket {
 public:
-    Socket();
-    virtual ~Socket();
+	Socket();
+	virtual ~Socket();
 };
 
 } /* namespace moth */
