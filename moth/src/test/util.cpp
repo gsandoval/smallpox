@@ -9,6 +9,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 int main(int argc, char* argv[]) {
     moth::Properties p("test.properties");
     cout << "str: " << p.Get("testStr") << endl;

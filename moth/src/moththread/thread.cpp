@@ -10,11 +10,18 @@
 
 namespace moth {
 
-Thread::Thread()  {
+Thread::Thread() {
 }
 
-Thread::Thread(Runnable *r) {
+Thread::Thread(Runnable *r) : runnable(r) {
 
+}
+
+void Thread::Start() {
+    /*
+    std::thread t(Run, this);
+    t.join();
+    */
 }
 
 Thread::~Thread() {

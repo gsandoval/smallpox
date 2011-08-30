@@ -12,6 +12,8 @@
 
 namespace moth {
 
+using namespace std;
+
 ConsoleLogger::ConsoleLogger(string classname) : Logger(classname) {
 }
 

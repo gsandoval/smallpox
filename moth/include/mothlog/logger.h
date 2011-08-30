@@ -10,28 +10,26 @@
 
 #include <string>
 
-using namespace std;
-
 namespace moth {
 
 class MothException;
 
 class Logger {
 public:
-    Logger(string classname);
+    Logger(std::string classname);
     virtual ~Logger();
-    virtual void Info(string msg) = 0;
-    virtual void Info(string msg, MothException* e) = 0;
-    virtual void Debug(string msg) = 0;
-    virtual void Debug(string msg, MothException* e) = 0;
-    virtual void Warn(string msg) = 0;
-    virtual void Warn(string msg, MothException* e) = 0;
-    virtual void Error(string msg) = 0;
-    virtual void Error(string msg, MothException* e) = 0;
+    virtual void Info(std::string msg) = 0;
+    virtual void Info(std::string msg, MothException* e) = 0;
+    virtual void Debug(std::string msg) = 0;
+    virtual void Debug(std::string msg, MothException* e) = 0;
+    virtual void Warn(std::string msg) = 0;
+    virtual void Warn(std::string msg, MothException* e) = 0;
+    virtual void Error(std::string msg) = 0;
+    virtual void Error(std::string msg, MothException* e) = 0;
 protected:
-    string classname;
+    std::string classname;
 
-    virtual string DateTime();
+    virtual std::string DateTime();
 };
 
 } /* namespace moth */

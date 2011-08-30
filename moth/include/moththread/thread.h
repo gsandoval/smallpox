@@ -8,6 +8,8 @@
 #ifndef THREAD_H_
 #define THREAD_H_
 
+#include <memory>
+
 namespace moth {
 
 class Runnable;
@@ -23,7 +25,7 @@ protected:
     virtual void Run() = 0;
 
 private:
-    Runnable* runnable;
+    std::shared_ptr<Runnable> runnable;
 };
 
 } /* namespace moth */

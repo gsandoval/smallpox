@@ -10,6 +10,8 @@
 
 namespace moth {
 
+using namespace std;
+
 FileLogger::FileLogger(string classname) : Logger(classname) {
 
 }

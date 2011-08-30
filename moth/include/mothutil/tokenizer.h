@@ -13,31 +13,29 @@
 #include <iterator>
 #include <cstddef>
 
-using namespace std;
-
 namespace moth {
 
 class Tokenizer {
 public:
-    struct iterator : std::iterator<input_iterator_tag, string> {
+    struct iterator : std::iterator<std::input_iterator_tag, std::string> {
     private:
-        vector<string>::iterator it;
+        std::vector<std::string>::iterator it;
     public:
-        iterator(vector<string>::iterator it);
+        iterator(std::vector<std::string>::iterator it);
         iterator(const iterator& tit);
         iterator& operator++();
         iterator operator++(int);
         bool operator==(const iterator& rhs);
         bool operator!=(const iterator& rhs);
-        string& operator*();
+        std::string& operator*();
     };
 
-    Tokenizer(string str, string delim = " ");
+    Tokenizer(std::string str, std::string delim = " ");
     virtual ~Tokenizer();
     iterator begin();
     iterator end();
 private:
-    vector<string> tokens;
+    std::vector<std::string> tokens;
     size_t curr_token;
 };
 

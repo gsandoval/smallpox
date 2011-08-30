@@ -11,24 +11,22 @@
 #include <string>
 #include <map>
 
-using namespace std;
-
 namespace moth {
 
 class Properties {
 public:
-    Properties(string filename);
+    Properties(std::string filename);
     virtual ~Properties();
-    string Get(string key, string def = "");
-    int GetInt(string key, int def = 0);
-    double GetDouble(string key, double def = 0.0);
-    long long GetLong(string key, long long def = 0);
-    char GetChar(string key, char def = 0);
-    bool GetBool(string key, bool def = false);
+    std::string Get(std::string key, std::string def = "");
+    int GetInt(std::string key, int def = 0);
+    double GetDouble(std::string key, double def = 0.0);
+    long long GetLong(std::string key, long long def = 0);
+    char GetChar(std::string key, char def = 0);
+    bool GetBool(std::string key, bool def = false);
 
 private:
-    map<string, string> properties;
-    string filename;
+    std::map<std::string, std::string> properties;
+    std::string filename;
 
     void LoadProperties();
 };

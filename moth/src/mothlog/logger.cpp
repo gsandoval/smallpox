@@ -15,6 +15,8 @@
 
 namespace moth {
 
+using namespace std;
+
 Logger::Logger(string _classname) : classname(_classname) {
 
 }

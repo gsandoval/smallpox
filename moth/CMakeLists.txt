@@ -16,6 +16,7 @@ set(moth_lib_src ${mothutil_lib_src} ${mothlog_lib_src} ${moththread_lib_src} ${
 
 include_directories(include src)
 add_library(${PROJECT_NAME} SHARED ${moth_lib_src})
+target_link_libraries(${PROJECT_NAME} pthread)
 
 add_executable(tok src/test/tok.cpp)
 target_link_libraries(tok moth)

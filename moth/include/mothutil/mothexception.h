@@ -11,18 +11,16 @@
 #include <exception>
 #include <string>
 
-using namespace std;
-
 namespace moth {
 
 class MothException: public std::exception {
 public:
-    MothException(string message, int line_number);
+    MothException(std::string message, int line_number);
     virtual ~MothException() throw();
     virtual const char* what() const throw();
     int LineNumber();
 private:
-    string message;
+    std::string message;
     int line_number;
 };
 

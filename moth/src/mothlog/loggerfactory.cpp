@@ -12,6 +12,8 @@
 
 namespace moth {
 
+using namespace std;
+
 LoggerFactory::LoggerFactory() {
 
 }

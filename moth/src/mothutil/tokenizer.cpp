@@ -9,6 +9,8 @@
 
 namespace moth {
 
+using namespace std;
+
 Tokenizer::Tokenizer(string line, string delim) : curr_token(0) {
     size_t start = 0, end = 0;
     while (end != string::npos) {

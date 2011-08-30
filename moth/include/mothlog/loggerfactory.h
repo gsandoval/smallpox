@@ -12,15 +12,13 @@
 
 #include <mothlog/logger.h>
 
-using namespace std;
-
 namespace moth {
 
 class LoggerFactory {
 public:
     LoggerFactory();
     virtual ~LoggerFactory();
-    static Logger* CreateLogger(string classname);
+    static Logger* CreateLogger(std::string classname);
 };
 
 } /* namespace moth */

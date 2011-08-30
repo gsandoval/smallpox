@@ -9,6 +9,8 @@
 
 namespace moth {
 
+using namespace std;
+
 MothException::MothException(string _message, int _line_number) : message(_message), line_number(_line_number) {
 
 }
