@@ -21,7 +21,7 @@ Thread::Thread() : state(Thread::NotRunning) {
 }
 
 Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
-
+    run_function_ptr = run_function;
 }
 
 Thread::Thread(shared_ptr<Runnable> r) : runnable(r), state(Thread::NotRunning) {
@@ -44,7 +44,9 @@ void* run_wrapper(void* param) {
     if (r) {
         r->Run();
     } else {
-        t->Run();
+        if (t->State() != Thread::Deleted) { // A beautiful race condition taken care of :)
+            t->Run();
+        }
     }
     t->SetState(Thread::Stopped);
     delete paramPair;
@@ -64,12 +66,6 @@ void Thread::Start() {
     param->first = this;
     if (runnable) {
         param->second = runnable;
-    } else {
-        /*
-        cout << "before" << endl;
-        param->second = shared_ptr<Runnable>(this);
-        cout << "after" << endl;
-        */
     }
     pthread_create(&tid, NULL, run_wrapper, param);
 }
@@ -79,8 +75,8 @@ Thread::~Thread() {
     while (state == Started) {
         state_mutex.Wait(200);
     }
+    state = Deleted;
     state_mutex.Unlock();
-    cout << "thread dtor" << endl;
 }
 
 void Thread::SetState(Thread::ThreadState state) {

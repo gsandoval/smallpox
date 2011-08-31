@@ -25,8 +25,8 @@ void run_local_thread() {
     shared_ptr<moth::Runnable> runnable(new RunnableImpl);
     moth::Thread t(runnable);
     t.Start();
-    //moth::Thread t2([](){ cout << "wordked!!!!" << endl; });
-    moth::Thread t2;
+    moth::Thread t2([](){ cout << "wordked!!!!" << endl; });
+    //moth::Thread t2;
     t2.Start();
 }
 

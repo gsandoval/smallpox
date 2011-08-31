@@ -32,7 +32,7 @@ public:
       *
       * Lists all the possible thread states.
       */
-    enum ThreadState { NotRunning, Started, Stopped };
+    enum ThreadState { NotRunning, Started, Stopped, Deleted };
 
     Thread();
     Thread(std::shared_ptr<Runnable> runnable);
@@ -56,6 +56,7 @@ private:
     std::string thread_name;
     ThreadState state;
     Mutex state_mutex;
+    void (*run_function_ptr)(void);
     friend void* run_wrapper(void*);
 
     /*!
