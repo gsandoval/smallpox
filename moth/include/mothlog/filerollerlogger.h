@@ -17,13 +17,13 @@ public:
     FileRollerLogger(std::string classname);
     virtual ~FileRollerLogger();
     virtual void Info(std::string msg);
-    virtual void Info(std::string msg, MothException* e);
+    virtual void Info(std::string msg, MothException e);
     virtual void Debug(std::string msg);
-    virtual void Debug(std::string msg, MothException* e);
+    virtual void Debug(std::string msg, MothException e);
     virtual void Warn(std::string msg);
-    virtual void Warn(std::string msg, MothException* e);
+    virtual void Warn(std::string msg, MothException e);
     virtual void Error(std::string msg);
-    virtual void Error(std::string msg, MothException* e);
+    virtual void Error(std::string msg, MothException e);
 };
 
 } /* namespace moth */

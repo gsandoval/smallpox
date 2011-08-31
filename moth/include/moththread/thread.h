@@ -9,23 +9,62 @@
 #define THREAD_H_
 
 #include <memory>
+#include <string>
+#include <pthread.h>
+
+#include <moththread/runnable.h>
+#include <moththread/mutex.h>
 
 namespace moth {
 
-class Runnable;
+void* run_wrapper(void*);
 
-class Thread {
+/*! \class Thread
+  * \brief A Thread abstraction
+  *
+  * This class provides the basic abstraction of a thread. The user should
+  * implement either the Thread's Run method or the Runnable's Run method.
+  */
+class Thread : public Runnable {
 public:
+    /*! \enum ThreadState
+      * \brief All Thread states
+      *
+      * Lists all the possible thread states.
+      */
+    enum ThreadState { NotRunning, Started, Stopped };
+
     Thread();
-    Thread(Runnable *runnable);
+    Thread(std::shared_ptr<Runnable> runnable);
+    Thread(void (*run_function)(void));
     virtual ~Thread();
     void Start();
-
-protected:
-    virtual void Run() = 0;
+    virtual void Run();
+    void Join();
+    void SetName(std::string thread_name);
+    std::string Name();
+    /*!
+      * This method return the current state of the thread.
+      * @see Thread::ThreadState
+      * @return The current state of the thread
+      */
+    ThreadState State();
 
 private:
     std::shared_ptr<Runnable> runnable;
+    pthread_t tid;
+    std::string thread_name;
+    ThreadState state;
+    Mutex state_mutex;
+    friend void* run_wrapper(void*);
+
+    /*!
+      * This method must not be called by anyone. I'll say it again, this method
+      * must not be called by anyone.
+      * @see State
+      * @param state The new state of the thread
+      */
+    void SetState(ThreadState state);
 };
 
 } /* namespace moth */

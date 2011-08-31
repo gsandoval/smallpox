@@ -10,22 +10,22 @@
 
 #include <string>
 
-namespace moth {
+#include <mothutil/mothexception.h>
 
-class MothException;
+namespace moth {
 
 class Logger {
 public:
     Logger(std::string classname);
     virtual ~Logger();
     virtual void Info(std::string msg) = 0;
-    virtual void Info(std::string msg, MothException* e) = 0;
+    virtual void Info(std::string msg, MothException e) = 0;
     virtual void Debug(std::string msg) = 0;
-    virtual void Debug(std::string msg, MothException* e) = 0;
+    virtual void Debug(std::string msg, MothException e) = 0;
     virtual void Warn(std::string msg) = 0;
-    virtual void Warn(std::string msg, MothException* e) = 0;
+    virtual void Warn(std::string msg, MothException e) = 0;
     virtual void Error(std::string msg) = 0;
-    virtual void Error(std::string msg, MothException* e) = 0;
+    virtual void Error(std::string msg, MothException e) = 0;
 protected:
     std::string classname;
 

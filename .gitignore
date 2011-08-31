@@ -9,3 +9,4 @@ Makefile
 cmake_install.cmake
 moth/bin
 moth/lib
+threads.exe.stackdump
