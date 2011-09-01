@@ -1,8 +1,8 @@
 /*
- * MothException.h
+ * mothexception.h
  *
  *  Created on: 05/07/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #ifndef MOTHEXCEPTION_H_

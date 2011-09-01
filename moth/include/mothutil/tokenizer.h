@@ -1,8 +1,8 @@
 /*
- * Tokenizer.h
+ * tokenizer.h
  *
  *  Created on: 03/07/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #ifndef TOKENIZER_H_

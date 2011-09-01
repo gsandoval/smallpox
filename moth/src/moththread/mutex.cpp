@@ -1,3 +1,9 @@
+/*
+ * mutex.cpp
+ *
+ *  Created on: 31/08/2011
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
+ */
 
 #include <ctime>
 #include <cstdlib>

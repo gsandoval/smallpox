@@ -1,5 +1,5 @@
 /*
- * Config.cpp
+ * util.cpp
  *
  *  Created on: 02/07/2011
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]

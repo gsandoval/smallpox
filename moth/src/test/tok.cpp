@@ -1,3 +1,10 @@
+/*
+ * tok.cpp
+ *
+ *  Created on: 31/08/2011
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
+ */
+
 #include <iostream>
 #include <algorithm>
 #include <string>

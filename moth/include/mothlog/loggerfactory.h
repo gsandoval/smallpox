@@ -1,8 +1,8 @@
 /*
- * LoggerFactory.h
+ * loggerfactory.h
  *
- *  Created on: 04/07/2011
- *      Author: darchitect
+ *  Created on: 31/08/2011
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #ifndef LOGGERFACTORY_H_

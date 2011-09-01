@@ -1,5 +1,5 @@
 /*
- * File.cpp
+ * properties.cpp
  *
  *  Created on: 23/06/2011
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]

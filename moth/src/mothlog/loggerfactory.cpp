@@ -1,8 +1,8 @@
 /*
- * LoggerFactory.cpp
+ * loggerfactory.cpp
  *
  *  Created on: 04/07/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #include <mothlog/loggerfactory.h>

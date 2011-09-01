@@ -1,3 +1,10 @@
+/*
+ * mutex.h
+ *
+ *  Created on: 31/08/2011
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
+ */
+
 #ifndef MUTEX_H
 #define MUTEX_H
 

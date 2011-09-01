@@ -1,7 +1,7 @@
 /*
  * runnable.cpp
  *
- *  Created on: 26/07/2011
+ *  Created on: 31/08/2011
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 

@@ -1,8 +1,8 @@
 /*
- * MothException.cpp
+ * mothexception.cpp
  *
  *  Created on: 05/07/2011
- *      Author: darchitect
+ *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
 #include <mothutil/mothexception.h>

@@ -1,5 +1,5 @@
 /*
- * Thread.cpp
+ * thread.cpp
  *
  *  Created on: 23/06/2011
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
@@ -17,15 +17,14 @@ namespace moth {
 
 using namespace std;
 
-Thread::Thread() : state(Thread::NotRunning) {
+Thread::Thread() : state(Thread::NotRunning), run_function_ptr(NULL) {
 }
 
 Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
     run_function_ptr = run_function;
 }
 
-Thread::Thread(shared_ptr<Runnable> r) : runnable(r), state(Thread::NotRunning) {
-
+Thread::Thread(shared_ptr<Runnable> r) : runnable(r), state(Thread::NotRunning), run_function_ptr(NULL) {
 }
 
 void Thread::SetName(std::string thread_name) {
@@ -45,7 +44,12 @@ void* run_wrapper(void* param) {
         r->Run();
     } else {
         if (t->State() != Thread::Deleted) { // A beautiful race condition taken care of :)
-            t->Run();
+            if (t->run_function_ptr != NULL) {
+                t->run_function_ptr();
+            } else {
+                t->Run();
+            }
+
         }
     }
     t->SetState(Thread::Stopped);
