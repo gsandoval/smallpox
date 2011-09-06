@@ -12,7 +12,8 @@
 
 namespace moth {
 
-Mutex::Mutex() : mutex(PTHREAD_MUTEX_INITIALIZER), condition(PTHREAD_COND_INITIALIZER) {
+Mutex::Mutex() : mutex(PTHREAD_MUTEX_INITIALIZER),
+    condition(PTHREAD_COND_INITIALIZER) {
 }
 
 Mutex::~Mutex() {

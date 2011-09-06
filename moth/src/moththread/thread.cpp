@@ -24,7 +24,8 @@ Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
     run_function_ptr = run_function;
 }
 
-Thread::Thread(shared_ptr<Runnable> r) : runnable(r), state(Thread::NotRunning), run_function_ptr(NULL) {
+Thread::Thread(shared_ptr<moth::Runnable> r) : runnable(r),
+    state(Thread::NotRunning), run_function_ptr(NULL) {
 }
 
 void Thread::SetName(std::string thread_name) {
@@ -36,7 +37,7 @@ string Thread::Name() {
 }
 
 void* run_wrapper(void* param) {
-    pair<Thread*, shared_ptr<Runnable>> *paramPair = (pair<Thread*, shared_ptr<Runnable>> *) param;
+    auto paramPair = (pair<Thread*, shared_ptr<Runnable> > *) param;
     Thread *t = paramPair->first;
     shared_ptr<Runnable> r = paramPair->second;
     t->SetState(Thread::Started);
@@ -66,7 +67,7 @@ void Thread::Join() {
 }
 
 void Thread::Start() {
-    pair<Thread*, shared_ptr<Runnable>> *param = new pair<Thread*, shared_ptr<Runnable>>;
+    auto param = new pair<Thread*, shared_ptr<Runnable> >;
     param->first = this;
     if (runnable) {
         param->second = runnable;
@@ -95,6 +96,10 @@ Thread::ThreadState Thread::State() {
     ThreadState c = state;
     state_mutex.Unlock();
     return c;
+}
+
+shared_ptr<Runnable> Thread::InnerRunnable() {
+    return runnable;
 }
 
 } /* namespace moth */

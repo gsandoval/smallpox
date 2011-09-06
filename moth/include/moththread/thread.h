@@ -58,14 +58,14 @@ private:
     Mutex state_mutex;
     void (*run_function_ptr)(void);
     friend void* run_wrapper(void*);
+    friend class ThreadPool;
 
-    /*!
-      * This method must not be called by anyone. I'll say it again, this method
-      * must not be called by anyone.
-      * @see State
-      * @param state The new state of the thread
-      */
     void SetState(ThreadState state);
+    /*!
+      * This method should only be called from the threadpool impl
+      * and allows it to get a reference to the inner worker
+      */
+    std::shared_ptr<Runnable> InnerRunnable();
 };
 
 } /* namespace moth */
