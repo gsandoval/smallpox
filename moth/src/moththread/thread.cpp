@@ -24,8 +24,7 @@ Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
     run_function_ptr = run_function;
 }
 
-Thread::Thread(shared_ptr<moth::Runnable> r) : runnable(r),
-    state(Thread::NotRunning), run_function_ptr(NULL) {
+Thread::Thread(shared_ptr<moth::Runnable> r) : runnable(r), state(Thread::NotRunning), run_function_ptr(NULL) {
 }
 
 void Thread::SetName(std::string thread_name) {

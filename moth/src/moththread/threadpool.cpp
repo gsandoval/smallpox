@@ -30,9 +30,7 @@ shared_ptr<ThreadPool> ThreadPoolBuilder::BuildThreadPool(
 
 shared_ptr<ThreadPool> ThreadPoolBuilder::BuildThreadPool(
     int max_thread_count, int max_idle_time, int core_threads) {
-    auto tp = shared_ptr<ThreadPool>(new ThreadPool(max_thread_count,
-                                                         max_idle_time,
-                                                         core_threads));
+    auto tp = shared_ptr<ThreadPool>(new ThreadPool(max_thread_count, max_idle_time, core_threads));
     tp->Start();
     return tp;
 }
@@ -108,18 +106,15 @@ void ThreadPool::Worker::ScheduleToStop() {
 ThreadPool::ThreadPool() : available_threads(0), queued_tasks(0) {
 }
 
-ThreadPool::ThreadPool(int thread_count) : max_thread_count(thread_count),
-    max_idle_time(-1), core_threads(0), available_threads(0), queued_tasks(0) {
+ThreadPool::ThreadPool(int thread_count) : max_thread_count(thread_count), max_idle_time(-1),
+    core_threads(0), available_threads(0), queued_tasks(0) {
 }
 
-ThreadPool::ThreadPool(int thread_count, int idle_time, int _core_threads) :
-    max_thread_count(thread_count), max_idle_time(idle_time),
-    core_threads(_core_threads), available_threads(_core_threads),
-    queued_tasks(0) {
+ThreadPool::ThreadPool(int thread_count, int idle_time, int _core_threads) : max_thread_count(thread_count),
+    max_idle_time(idle_time), core_threads(_core_threads), available_threads(_core_threads), queued_tasks(0) {
     threads_lock.Lock();
     for (int i = 0; i < core_threads; ++i) {
-        shared_ptr<Thread> t(
-                    new Thread(shared_ptr<Runnable>(new Worker(this))));
+        shared_ptr<Thread> t(new Thread(shared_ptr<Runnable>(new Worker(this))));
         threads.push_back(t);
         t->Start();
     }
@@ -138,20 +133,17 @@ void ThreadPool::Run() {
         threads_lock.Lock();
         if (available_threads > 0) {
             for (auto it = threads.begin(); it != threads.end(); ++it) {
-                shared_ptr<Worker> w = dynamic_pointer_cast<Worker>(
-                            (*it)->InnerRunnable());
+                shared_ptr<Worker> w = dynamic_pointer_cast<Worker>((*it)->InnerRunnable());
                 if (w->State() == ThreadPool::Worker::Available) {
                     TaskPayload tp = PollTask();
                     RunTask(w, tp);
                 }
             }
         } else if (static_cast<int>(threads.size()) < max_thread_count) {
-            shared_ptr<Thread> t(
-                        new Thread(shared_ptr<Runnable>(new Worker(this))));
+            shared_ptr<Thread> t(new Thread(shared_ptr<Runnable>(new Worker(this))));
             threads.push_back(t);
             t->Start();
-            shared_ptr<Worker> w = dynamic_pointer_cast<Worker>(
-                        t->InnerRunnable());
+            shared_ptr<Worker> w = dynamic_pointer_cast<Worker>(t->InnerRunnable());
             TaskPayload tp = PollTask();
             RunTask(w, tp);
         }

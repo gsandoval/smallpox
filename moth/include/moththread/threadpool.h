@@ -88,9 +88,7 @@ class ThreadPoolBuilder {
 public:
     static std::shared_ptr<ThreadPool> BuildThreadPool();
     static std::shared_ptr<ThreadPool> BuildThreadPool(int max_thread_count);
-    static std::shared_ptr<ThreadPool> BuildThreadPool(int max_thread_count,
-                                                       int max_idle_time,
-                                                       int core_threads);
+    static std::shared_ptr<ThreadPool> BuildThreadPool(int max_thread_count, int max_idle_time, int core_threads);
 };
 
 } /* namespace moth */
