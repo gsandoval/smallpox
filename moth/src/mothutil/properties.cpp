@@ -16,6 +16,10 @@ namespace moth {
 
 using namespace std;
 
+Properties::Properties() {
+
+}
+
 Properties::Properties(string _filename) : filename(_filename) {
     LoadProperties();
 }

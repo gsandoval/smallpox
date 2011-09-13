@@ -31,11 +31,12 @@ void Mutex::Unlock() {
     pthread_mutex_unlock(&mutex);
 }
 
-void Mutex::Wait(long long timeout) {
+bool Mutex::Wait(long long timeout) {
     timespec ts;
     ts.tv_sec = time(NULL) + timeout / 1000;
     ts.tv_nsec = (timeout % 1000) * 1000 * 1000;
-    pthread_cond_timedwait(&condition, &mutex, &ts);
+    int ret = pthread_cond_timedwait(&condition, &mutex, &ts);
+    return ret == 0;
 }
 
 void Mutex::Wait() {

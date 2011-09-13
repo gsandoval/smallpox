@@ -24,15 +24,18 @@ private:
     public:
         enum WorkerState { Busy, Available };
 
-        Worker(ThreadPool *pool);
+        Worker(ThreadPool *pool, long long max_idle_time);
         ~Worker();
         void SetTask(std::shared_ptr<Runnable> task);
         void SetTask(void (*function_task)(void));
         void Run();
         void ScheduleToStop();
         WorkerState State();
+        bool IsExpired();
     private:
         std::shared_ptr<Runnable> task;
+        long long max_idle_time;
+        long long last_scheduled_task;
         void (*function_task)(void);
         Mutex task_mutex;
         bool running;
@@ -61,18 +64,21 @@ private:
     long long max_idle_time;
     int core_threads;
     Mutex threads_lock;
-    std::vector<TaskPayload> task_queue[];
+    std::vector<std::vector<std::shared_ptr<TaskPayload> > > task_queue;
     Mutex task_queue_mutex;
     bool alive;
     int available_threads;
     int queued_tasks;
+    long long last_purge_time;
     friend class ThreadPoolBuilder;
 
-    ThreadPool();
     ThreadPool(int max_thread_count);
     ThreadPool(int max_thread_count, int max_idle_time, int core_threads);
-    TaskPayload PollTask();
-    void RunTask(std::shared_ptr<Worker> w, TaskPayload tp);
+    std::shared_ptr<TaskPayload> PollTask();
+    std::shared_ptr<Worker> CreateWorker();
+    void PurgeWorkers();
+    void ReleaseThread();
+    void RunTask(std::shared_ptr<Worker> w, std::shared_ptr<TaskPayload> tp);
     void BeforeExecute(std::shared_ptr<Runnable> task);
     void BeforeExecute(void (*function_task)(void));
     void AfterExecute(std::shared_ptr<Runnable> task);
@@ -82,11 +88,9 @@ private:
 };
 
 const int ThreadPool::MAX_TASK_PRIORITY = 10;
-std::vector<ThreadPool::TaskPayload> task_queue[ThreadPool::MAX_TASK_PRIORITY];
 
 class ThreadPoolBuilder {
 public:
-    static std::shared_ptr<ThreadPool> BuildThreadPool();
     static std::shared_ptr<ThreadPool> BuildThreadPool(int max_thread_count);
     static std::shared_ptr<ThreadPool> BuildThreadPool(int max_thread_count, int max_idle_time, int core_threads);
 };

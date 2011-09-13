@@ -19,7 +19,7 @@ public:
     bool TryLock();
     void Lock();
     void Unlock();
-    void Wait(long long timeout);
+    bool Wait(long long timeout);
     void Wait();
     void Notify();
     void NotifyAll();

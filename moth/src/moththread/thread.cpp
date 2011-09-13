@@ -18,13 +18,30 @@ namespace moth {
 using namespace std;
 
 Thread::Thread() : state(Thread::NotRunning), run_function_ptr(NULL) {
+    cout << "thread created" << endl;
+}
+
+Thread::Thread(string name) : thread_name(name),  state(Thread::NotRunning), run_function_ptr(NULL) {
+    cout << "thread " << thread_name << " created" << endl;
 }
 
 Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
     run_function_ptr = run_function;
+    cout << "thread created" << endl;
+}
+
+Thread::Thread(void (*run_function)(void), string name) : thread_name(name), state(Thread::NotRunning) {
+    run_function_ptr = run_function;
+    cout << "thread " << thread_name << " created" << endl;
 }
 
 Thread::Thread(shared_ptr<moth::Runnable> r) : runnable(r), state(Thread::NotRunning), run_function_ptr(NULL) {
+    cout << "thread created" << endl;
+}
+
+Thread::Thread(shared_ptr<moth::Runnable> r, string name) : runnable(r), thread_name(name), state(Thread::NotRunning),
+    run_function_ptr(NULL) {
+    cout << "thread " << thread_name << " created" << endl;
 }
 
 void Thread::SetName(std::string thread_name) {
@@ -58,7 +75,6 @@ void* run_wrapper(void* param) {
 }
 
 void Thread::Run() {
-    cout << "thread run" << endl;
 }
 
 void Thread::Join() {
@@ -66,6 +82,7 @@ void Thread::Join() {
 }
 
 void Thread::Start() {
+    cout << "thread " << thread_name << " started" << endl;
     auto param = new pair<Thread*, shared_ptr<Runnable> >;
     param->first = this;
     if (runnable) {
@@ -81,6 +98,7 @@ Thread::~Thread() {
     }
     state = Deleted;
     state_mutex.Unlock();
+    cout << "thread " << thread_name << " destroyed" << endl;
 }
 
 void Thread::SetState(Thread::ThreadState state) {

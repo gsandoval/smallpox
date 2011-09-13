@@ -15,6 +15,7 @@ namespace moth {
 
 class Properties {
 public:
+    Properties();
     Properties(std::string filename);
     virtual ~Properties();
     std::string Get(std::string key, std::string def = "");

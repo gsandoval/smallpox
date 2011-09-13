@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <moththread/thread.h>
+#include <moththread/threadpool.h>
 #include <moththread/runnable.h>
 
 using namespace std;
@@ -39,7 +40,11 @@ void run_local_thread() {
 }
 
 int main(int argc, char* argv[]) {
-    run_local_thread();
+    //run_local_thread();
+    shared_ptr<moth::ThreadPool> pool = moth::ThreadPoolBuilder::BuildThreadPool(1);
+    for (int i = 0; i < 100; ++i) {
+        pool->Execute([]() { cout << "hello world" << endl; });
+    }
     string r;
     cin >> r;
     return 0;

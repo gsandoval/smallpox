@@ -35,8 +35,11 @@ public:
     enum ThreadState { NotRunning, Started, Stopped, Deleted };
 
     Thread();
+    Thread(std::string thread_name);
     Thread(std::shared_ptr<Runnable> runnable);
+    Thread(std::shared_ptr<Runnable> runnable, std::string thread_name);
     Thread(void (*run_function)(void));
+    Thread(void (*run_function)(void), std::string thread_name);
     virtual ~Thread();
     void Start();
     virtual void Run();
