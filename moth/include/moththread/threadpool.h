@@ -22,7 +22,7 @@ class ThreadPool : public Thread {
 private:
     class Worker : public Runnable {
     public:
-        enum WorkerState { Busy, Available };
+        enum WorkerState { Busy, Available, Stopped };
 
         Worker(ThreadPool *pool, long long max_idle_time);
         ~Worker();
@@ -41,6 +41,8 @@ private:
         bool running;
         ThreadPool *pool;
         WorkerState state;
+
+        void WaitForTask();
     };
 
 public:
@@ -53,6 +55,7 @@ public:
 
     virtual ~ThreadPool();
     void Run();
+    void Shutdown();
     void Execute(std::shared_ptr<Runnable> task);
     void Execute(std::shared_ptr<Runnable> task, int priority);
     void Execute(void (*function_task)(void));

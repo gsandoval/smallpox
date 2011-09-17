@@ -41,10 +41,14 @@ void run_local_thread() {
 
 int main(int argc, char* argv[]) {
     //run_local_thread();
-    shared_ptr<moth::ThreadPool> pool = moth::ThreadPoolBuilder::BuildThreadPool(1);
-    for (int i = 0; i < 100; ++i) {
-        pool->Execute([]() { cout << "hello world" << endl; });
+    shared_ptr<moth::ThreadPool> pool = moth::ThreadPoolBuilder::BuildThreadPool(4);
+    for (int i = 0; i < 50; ++i) {
+        pool->Execute([]() {
+                      cout << moth::GetThreadName() << " -> hello world" << endl;
+                      for(int i = 0; i < 1000; ++i)for(int j = 0; j < 1000000; ++j);
+        });
     }
+    //pool->Shutdown();
     string r;
     cin >> r;
     return 0;

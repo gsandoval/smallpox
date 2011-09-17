@@ -14,6 +14,7 @@
 
 #include <moththread/runnable.h>
 #include <moththread/mutex.h>
+#include <moththread/threadlocal.h>
 
 namespace moth {
 
@@ -56,7 +57,7 @@ public:
 private:
     std::shared_ptr<Runnable> runnable;
     pthread_t tid;
-    std::string thread_name;
+    std::string unsafe_thread_name;
     ThreadState state;
     Mutex state_mutex;
     void (*run_function_ptr)(void);
@@ -70,6 +71,10 @@ private:
       */
     std::shared_ptr<Runnable> InnerRunnable();
 };
+
+void SetThreadName(std::string thread_name);
+
+std::string GetThreadName();
 
 } /* namespace moth */
 #endif /* THREAD_H_ */

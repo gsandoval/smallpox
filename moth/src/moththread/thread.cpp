@@ -8,9 +8,9 @@
 #include <pthread.h>
 #include <cstdlib>
 #include <utility>
-#include <iostream>
 
 #include <moththread/thread.h>
+#include <moththread/threadlocal.h>
 #include <moththread/runnable.h>
 
 namespace moth {
@@ -18,43 +18,57 @@ namespace moth {
 using namespace std;
 
 Thread::Thread() : state(Thread::NotRunning), run_function_ptr(NULL) {
-    cout << "thread created" << endl;
 }
 
-Thread::Thread(string name) : thread_name(name),  state(Thread::NotRunning), run_function_ptr(NULL) {
-    cout << "thread " << thread_name << " created" << endl;
+Thread::Thread(string name) : unsafe_thread_name(name),  state(Thread::NotRunning), run_function_ptr(NULL) {
 }
 
 Thread::Thread(void (*run_function)(void)) : state(Thread::NotRunning) {
     run_function_ptr = run_function;
-    cout << "thread created" << endl;
 }
 
-Thread::Thread(void (*run_function)(void), string name) : thread_name(name), state(Thread::NotRunning) {
+Thread::Thread(void (*run_function)(void), string name) : unsafe_thread_name(name), state(Thread::NotRunning) {
     run_function_ptr = run_function;
-    cout << "thread " << thread_name << " created" << endl;
 }
 
 Thread::Thread(shared_ptr<moth::Runnable> r) : runnable(r), state(Thread::NotRunning), run_function_ptr(NULL) {
-    cout << "thread created" << endl;
 }
 
-Thread::Thread(shared_ptr<moth::Runnable> r, string name) : runnable(r), thread_name(name), state(Thread::NotRunning),
+Thread::Thread(shared_ptr<moth::Runnable> r, string name) : runnable(r), unsafe_thread_name(name), state(Thread::NotRunning),
     run_function_ptr(NULL) {
-    cout << "thread " << thread_name << " created" << endl;
+}
+
+ThreadLocal<Thread> _current_thread;
+
+void _SetCurrentThread(Thread *t) {
+    _current_thread.Set(t);
+}
+
+Thread* GetCurrentThread() {
+    return _current_thread.Get();
+}
+
+string GetThreadName() {
+    Thread *t = _current_thread.Get();
+    string name = "Unnamed-Thread";
+    if (t != NULL) {
+        name = t->Name();
+    }
+    return name;
 }
 
 void Thread::SetName(std::string thread_name) {
-    this->thread_name = thread_name;
+    this->unsafe_thread_name = thread_name;
 }
 
 string Thread::Name() {
-    return thread_name;
+    return unsafe_thread_name;
 }
 
 void* run_wrapper(void* param) {
     auto paramPair = (pair<Thread*, shared_ptr<Runnable> > *) param;
     Thread *t = paramPair->first;
+    _SetCurrentThread(t);
     shared_ptr<Runnable> r = paramPair->second;
     t->SetState(Thread::Started);
     if (r) {
@@ -66,7 +80,6 @@ void* run_wrapper(void* param) {
             } else {
                 t->Run();
             }
-
         }
     }
     t->SetState(Thread::Stopped);
@@ -82,7 +95,6 @@ void Thread::Join() {
 }
 
 void Thread::Start() {
-    cout << "thread " << thread_name << " started" << endl;
     auto param = new pair<Thread*, shared_ptr<Runnable> >;
     param->first = this;
     if (runnable) {
@@ -98,7 +110,6 @@ Thread::~Thread() {
     }
     state = Deleted;
     state_mutex.Unlock();
-    cout << "thread " << thread_name << " destroyed" << endl;
 }
 
 void Thread::SetState(Thread::ThreadState state) {

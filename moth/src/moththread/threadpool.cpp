@@ -80,15 +80,27 @@ void ThreadPool::Worker::Run() {
                 }
                 function_task = NULL;
             }
-            pool->ReleaseThread();
-        } else {
             task_mutex.Lock();
             last_scheduled_task = Clock::CurrentTime();
             state = Available;
-            task_mutex.Wait();
             task_mutex.Unlock();
+
+            pool->ReleaseThread();
+
+            WaitForTask();
+        } else {
+            WaitForTask();
         }
     }
+    state = Stopped;
+}
+
+void ThreadPool::Worker::WaitForTask() {
+    task_mutex.Lock();
+    if (running && !(task || function_task)) {
+        task_mutex.Wait();
+    }
+    task_mutex.Unlock();
 }
 
 bool ThreadPool::Worker::IsExpired() {
@@ -100,8 +112,8 @@ ThreadPool::Worker::WorkerState ThreadPool::Worker::State() {
 }
 
 void ThreadPool::Worker::ScheduleToStop() {
-    running = false;
     task_mutex.Lock();
+    running = false;
     task_mutex.Notify();
     task_mutex.Unlock();
 }
@@ -154,11 +166,35 @@ void ThreadPool::ReleaseThread() {
     threads_lock.Unlock();
 }
 
+ThreadPool::~ThreadPool() {
+    Shutdown();
+}
+
+void ThreadPool::Shutdown() {
+    if (!alive) {
+        return;
+    }
+
+    alive = false;
+
+    task_queue_mutex.Lock();
+    task_queue_mutex.Notify();
+    task_queue_mutex.Unlock();
+
+    threads_lock.Lock();
+    for (auto it = threads.begin(); it != threads.end(); ++it) {
+        shared_ptr<Worker> w = dynamic_pointer_cast<Worker>((*it)->InnerRunnable());
+        w->ScheduleToStop();
+    }
+    threads_lock.Notify();
+    threads_lock.Unlock();
+}
+
 void ThreadPool::Run() {
     alive = true;
     while (alive) {
         task_queue_mutex.Lock();
-        if (queued_tasks <= 0) {
+        if (queued_tasks <= 0 && alive /* Race condition aware */) {
             if (max_idle_time == -1) {
                 task_queue_mutex.Wait();
             } else {
@@ -171,12 +207,16 @@ void ThreadPool::Run() {
         }
         task_queue_mutex.Unlock();
 
+        if (!alive) {
+            continue;
+        }
+
         threads_lock.Lock();
-        if (available_threads == 0 && static_cast<int>(threads.size()) == max_thread_count) {
+        if (available_threads == 0 && static_cast<int>(threads.size()) == max_thread_count && alive /* Race condition aware */) {
             threads_lock.Wait();
         }
 
-        if (available_threads > 0) {
+        if (available_threads > 0 && alive /* Race condition aware */) {
             for (auto it = threads.begin(); it != threads.end(); ++it) {
                 shared_ptr<Worker> w = dynamic_pointer_cast<Worker>((*it)->InnerRunnable());
                 if (w->State() == ThreadPool::Worker::Available) {
@@ -186,7 +226,7 @@ void ThreadPool::Run() {
                     }
                 }
             }
-        } else if (static_cast<int>(threads.size()) < max_thread_count) {
+        } else if (static_cast<int>(threads.size()) < max_thread_count && alive /* Race condition aware */) {
             shared_ptr<TaskPayload> tp = PollTask();
             if (tp) {
                 shared_ptr<Worker> w = CreateWorker();
@@ -220,10 +260,6 @@ shared_ptr<ThreadPool::TaskPayload> ThreadPool::PollTask() {
     }
     task_queue_mutex.Unlock();
     return tp;
-}
-
-ThreadPool::~ThreadPool() {
-    // TODO wait until all threads have stopped
 }
 
 void ThreadPool::Execute(shared_ptr<Runnable> task) {
