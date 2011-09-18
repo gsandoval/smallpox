@@ -5,7 +5,7 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothlog/loggerfactory.h>
+#include <moth/log/loggerfactory.h>
 
 using namespace std;
 

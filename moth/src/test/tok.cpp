@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <string>
 
-#include <mothutil/tokenizer.h>
+#include <moth/util/tokenizer.h>
 
 using namespace std;
 

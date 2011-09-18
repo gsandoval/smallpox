@@ -5,7 +5,7 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <mothutil/properties.h>
+#include <moth/util/properties.h>
 
 #include <iostream>
 

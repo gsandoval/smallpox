@@ -7,10 +7,10 @@ add_definitions(-g -Wall -std=c++0x)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-set(mothlog_lib_src src/mothlog/consolelogger.cpp src/mothlog/filelogger.cpp src/mothlog/filerollerlogger.cpp src/mothlog/logger.cpp src/mothlog/loggerfactory.cpp)
-set(mothutil_lib_src src/mothutil/mothexception.cpp src/mothutil/tokenizer.cpp src/mothutil/properties.cpp src/mothutil/clock.cpp)
-set(moththread_lib_src src/moththread/thread.cpp src/moththread/mutex.cpp src/moththread/threadpool.cpp)
-set(mothnet_lib_src src/mothnet/socket.cpp)
+set(mothlog_lib_src src/moth/log/consolelogger.cpp src/moth/log/filelogger.cpp src/moth/log/filerollerlogger.cpp src/moth/log/logger.cpp src/moth/log/loggerfactory.cpp)
+set(mothutil_lib_src src/moth/util/mothexception.cpp src/moth/util/tokenizer.cpp src/moth/util/properties.cpp src/moth/util/clock.cpp)
+set(moththread_lib_src src/moth/thread/thread.cpp src/moth/thread/mutex.cpp src/moth/thread/threadpool.cpp)
+set(mothnet_lib_src src/moth/net/socket.cpp)
 
 set(moth_lib_src ${mothutil_lib_src} ${mothlog_lib_src} ${moththread_lib_src} ${mothnet_lib_src})
 

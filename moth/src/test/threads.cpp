@@ -8,10 +8,10 @@
 #include <iostream>
 #include <memory>
 
-#include <moththread/thread.h>
-#include <moththread/threadpool.h>
-#include <moththread/runnable.h>
-#include <mothlog/loggerfactory.h>
+#include <moth/thread/thread.h>
+#include <moth/thread/threadpool.h>
+#include <moth/thread/runnable.h>
+#include <moth/log/loggerfactory.h>
 
 using namespace std;
 
