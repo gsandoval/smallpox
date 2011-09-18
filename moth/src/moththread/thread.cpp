@@ -40,15 +40,15 @@ Thread::Thread(shared_ptr<moth::Runnable> r, string name) : runnable(r), unsafe_
 
 ThreadLocal<Thread> _current_thread;
 
-void _SetCurrentThread(Thread *t) {
+void Thread::SetCurrentThread(Thread *t) {
     _current_thread.Set(t);
 }
 
-Thread* GetCurrentThread() {
+Thread* Thread::CurrentThread() {
     return _current_thread.Get();
 }
 
-string GetThreadName() {
+string Thread::CurrentThreadName() {
     Thread *t = _current_thread.Get();
     string name = "Unnamed-Thread";
     if (t != NULL) {
@@ -68,7 +68,7 @@ string Thread::Name() {
 void* run_wrapper(void* param) {
     auto paramPair = (pair<Thread*, shared_ptr<Runnable> > *) param;
     Thread *t = paramPair->first;
-    _SetCurrentThread(t);
+    Thread::SetCurrentThread(t);
     shared_ptr<Runnable> r = paramPair->second;
     t->SetState(Thread::Started);
     if (r) {

@@ -9,6 +9,7 @@
 #define LOGGERFACTORY_H_
 
 #include <string>
+#include <memory>
 
 #include <mothlog/logger.h>
 
@@ -18,7 +19,7 @@ class LoggerFactory {
 public:
     LoggerFactory();
     virtual ~LoggerFactory();
-    static Logger* CreateLogger(std::string classname);
+    static std::shared_ptr<Logger> CreateLogger(std::string classname);
 };
 
 } /* namespace moth */

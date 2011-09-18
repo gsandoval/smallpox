@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    moth::Logger* logger = moth::LoggerFactory::CreateLogger(__FILE__);
+    shared_ptr<moth::Logger> logger = moth::LoggerFactory::CreateLogger(__FILE__);
     logger->Error("Hello world");
     return 0;
 }

@@ -53,6 +53,8 @@ public:
       * @return The current state of the thread
       */
     ThreadState State();
+    static std::string CurrentThreadName();
+    static Thread* CurrentThread();
 
 private:
     std::shared_ptr<Runnable> runnable;
@@ -63,6 +65,7 @@ private:
     void (*run_function_ptr)(void);
     friend void* run_wrapper(void*);
     friend class ThreadPool;
+    static void SetCurrentThread(Thread *t);
 
     void SetState(ThreadState state);
     /*!
@@ -71,10 +74,6 @@ private:
       */
     std::shared_ptr<Runnable> InnerRunnable();
 };
-
-void SetThreadName(std::string thread_name);
-
-std::string GetThreadName();
 
 } /* namespace moth */
 #endif /* THREAD_H_ */

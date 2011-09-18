@@ -21,8 +21,8 @@ LoggerFactory::LoggerFactory() {
 LoggerFactory::~LoggerFactory() {
 }
 
-Logger* LoggerFactory::CreateLogger(string classname) {
-    return new ConsoleLogger(classname);
+shared_ptr<Logger> LoggerFactory::CreateLogger(string classname) {
+    return shared_ptr<Logger>(new ConsoleLogger(classname));
 }
 
 } /* namespace moth */

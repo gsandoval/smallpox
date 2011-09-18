@@ -11,6 +11,7 @@
 #include <moththread/thread.h>
 #include <moththread/threadpool.h>
 #include <moththread/runnable.h>
+#include <mothlog/loggerfactory.h>
 
 using namespace std;
 
@@ -41,10 +42,13 @@ void run_local_thread() {
 
 int main(int argc, char* argv[]) {
     //run_local_thread();
+    shared_ptr<moth::Logger> logger = moth::LoggerFactory::CreateLogger(__FILE__);
+    logger->Debug("Hi there");
     shared_ptr<moth::ThreadPool> pool = moth::ThreadPoolBuilder::BuildThreadPool(4);
     for (int i = 0; i < 50; ++i) {
         pool->Execute([]() {
-                      cout << moth::GetThreadName() << " -> hello world" << endl;
+                      shared_ptr<moth::Logger> LOG = moth::LoggerFactory::CreateLogger(__FILE__);
+                LOG->Debug("Hello");
                       for(int i = 0; i < 1000; ++i)for(int j = 0; j < 1000000; ++j);
         });
     }
