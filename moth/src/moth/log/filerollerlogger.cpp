@@ -19,36 +19,8 @@ FileRollerLogger::FileRollerLogger(string classname) : Logger(classname) {
 FileRollerLogger::~FileRollerLogger() {
 }
 
-void FileRollerLogger::Error(string msg) {
-
-}
-
-void FileRollerLogger::Error(string msg, MothException e) {
-
-}
-
-void FileRollerLogger::Warn(string msg) {
-
-}
-
-void FileRollerLogger::Warn(string msg, MothException e) {
-
-}
-
-void FileRollerLogger::Debug(string msg) {
-
-}
-
-void FileRollerLogger::Debug(string msg, MothException e) {
-
-}
-
-void FileRollerLogger::Info(string msg) {
-
-}
-
-void FileRollerLogger::Info(string msg, MothException e) {
-
+void FileRollerLogger::Write(string message) {
+    cout << message << endl;
 }
 
 } /* namespace moth */

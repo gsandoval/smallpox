@@ -8,6 +8,8 @@
 #ifndef FILE_LOGGER_H_
 #define FILE_LOGGER_H_
 
+#include <string>
+
 #include <moth/log/logger.h>
 
 namespace moth {
@@ -16,14 +18,7 @@ class FileLogger : public Logger {
 public:
     FileLogger(std::string classname);
     virtual ~FileLogger();
-    virtual void Info(std::string msg);
-    virtual void Info(std::string msg, MothException e);
-    virtual void Debug(std::string msg);
-    virtual void Debug(std::string msg, MothException e);
-    virtual void Warn(std::string msg);
-    virtual void Warn(std::string msg, MothException e);
-    virtual void Error(std::string msg);
-    virtual void Error(std::string msg, MothException e);
+    virtual void Write(std::string message);
 };
 
 } /* namespace moth */

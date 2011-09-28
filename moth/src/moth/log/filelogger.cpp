@@ -19,36 +19,8 @@ FileLogger::FileLogger(string classname) : Logger(classname) {
 FileLogger::~FileLogger() {
 }
 
-void FileLogger::Error(string msg) {
-
-}
-
-void FileLogger::Error(string msg, MothException e) {
-
-}
-
-void FileLogger::Warn(string msg) {
-
-}
-
-void FileLogger::Warn(string msg, MothException e) {
-
-}
-
-void FileLogger::Debug(string msg) {
-
-}
-
-void FileLogger::Debug(string msg, MothException e) {
-
-}
-
-void FileLogger::Info(string msg) {
-
-}
-
-void FileLogger::Info(string msg, MothException e) {
-
+void FileLogger::Write(string message) {
+    cout << message << endl;
 }
 
 } /* namespace moth */

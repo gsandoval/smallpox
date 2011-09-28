@@ -20,6 +20,8 @@ public:
     LoggerFactory();
     virtual ~LoggerFactory();
     static std::shared_ptr<Logger> CreateLogger(std::string classname);
+private:
+    std::string logger_type;
 };
 
 } /* namespace moth */

@@ -12,8 +12,6 @@
 
 namespace moth {
 
-using namespace std;
-
 LoggerFactory::LoggerFactory() {
 
 }
@@ -21,8 +19,8 @@ LoggerFactory::LoggerFactory() {
 LoggerFactory::~LoggerFactory() {
 }
 
-shared_ptr<Logger> LoggerFactory::CreateLogger(string classname) {
-    return shared_ptr<Logger>(new ConsoleLogger(classname));
+std::shared_ptr<Logger> LoggerFactory::CreateLogger(std::string classname) {
+    return std::shared_ptr<Logger>(new ConsoleLogger(classname));
 }
 
 } /* namespace moth */
