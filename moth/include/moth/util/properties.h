@@ -5,8 +5,8 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#ifndef FILE_H_
-#define FILE_H_
+#ifndef PROPERTIES_H_
+#define PROPERTIES_H_
 
 #include <string>
 #include <map>
@@ -33,4 +33,4 @@ private:
 };
 
 } /* namespace moth */
-#endif /* FILE_H_ */
+#endif /* PROPERTIES_H_ */
