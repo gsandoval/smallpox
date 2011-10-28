@@ -12,7 +12,9 @@
 #include <sstream>
 
 #include <moth/log/logger.h>
+#include <moth/log/loglevel.h>
 #include <moth/thread/thread.h>
+#include <moth/util/clock.h>
 
 namespace moth {
 
@@ -29,6 +31,10 @@ void Logger::LogDequeuer::Run() {
     }
 }
 
+void Logger::Setup(Properties properties) {
+
+}
+
 Logger::Logger(string _classname) : classname(_classname) {
 
 }
@@ -36,64 +42,50 @@ Logger::Logger(string _classname) : classname(_classname) {
 Logger::~Logger() {
 }
 
-string Logger::DateTime() {
-    time_t t = time(NULL);
-    tm* timeinfo = localtime(&t);
-    timeval tv;
-    gettimeofday(&tv, NULL);
-
-    ostringstream oss;
-    oss << setfill('0');
-    oss << timeinfo->tm_year + 1900 << "-" << setw(2) << timeinfo->tm_mon + 1 << "-" << setw(2) << timeinfo->tm_mday;
-    oss << " " << setw(2) << timeinfo->tm_hour << ":" << setw(2) << timeinfo->tm_min << ":" << setw(2) << timeinfo->tm_sec;
-    oss << "," << ((tv.tv_usec / 1000) % 1000);
-    return oss.str();
-}
-
-void Logger::Queue(const string message) {
+void Logger::Queue(const LogAppender::LogMessage &message) {
     message_queue_mutex.Lock();
     message_queue.push_back(message);
     message_queue_mutex.Unlock();
 }
 
 void Logger::Error(string msg) {
-    Queue(DateTime() + " [" + Thread::CurrentThreadName() + "] ERROR " + classname + " - " + msg);
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), msg, Thread::CurrentThreadName(), classname, ERROR_LEVEL));
 }
 
 void Logger::Error(string msg, MothException e) {
     ostringstream oss;
-    oss << DateTime() << " [" << Thread::CurrentThreadName() << "] ERROR " << classname << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
-    Queue(oss.str());
+    oss << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), oss.str(), Thread::CurrentThreadName(), classname, ERROR_LEVEL));
 }
 
 void Logger::Warn(string msg) {
-    Queue(DateTime() + " [" + Thread::CurrentThreadName() + "] WARN " + classname + " - " + msg);
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), msg, Thread::CurrentThreadName(), classname, WARN_LEVEL));
 }
 
 void Logger::Warn(string msg, MothException e) {
     ostringstream oss;
-    oss << DateTime() << " [" << Thread::CurrentThreadName() << "] WARN " << classname << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
-    Queue(oss.str());
+    oss << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), oss.str(), Thread::CurrentThreadName(), classname, WARN_LEVEL));
 }
 
 void Logger::Debug(string msg) {
-    Queue(DateTime() + " [" + Thread::CurrentThreadName() + "] DEBUG " + classname + " - " + msg);
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), msg, Thread::CurrentThreadName(), classname, DEBUG_LEVEL));
 }
 
 void Logger::Debug(string msg, MothException e) {
     ostringstream oss;
-    oss << DateTime() << " [" << Thread::CurrentThreadName() << "] DEBUG " << classname << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
-    Queue(oss.str());
+    oss << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), oss.str(), Thread::CurrentThreadName(), classname, DEBUG_LEVEL));
 }
 
 void Logger::Info(string msg) {
-    Queue(DateTime() + " [" + Thread::CurrentThreadName() + "] INFO " + classname + " - " + msg);
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), msg, Thread::CurrentThreadName(), classname, INFO_LEVEL));
 }
 
 void Logger::Info(string msg, MothException e) {
     ostringstream oss;
-    oss << DateTime() << " [" << Thread::CurrentThreadName() << "] INFO " << classname << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
-    Queue(oss.str());
+    oss << ":" << e.LineNumber() << " - " << msg << "(" << e.what() << ")";
+    Queue(LogAppender::LogMessage(Clock::CurrentTimeString(), oss.str(), Thread::CurrentThreadName(), classname, INFO_LEVEL));
 }
 
 } /* namespace moth */

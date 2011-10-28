@@ -78,13 +78,6 @@ long long Properties::GetLong(string key, long long def) {
     return ret;
 }
 
-char Properties::GetChar(string key, char def) {
-    char ret = def;
-    if (properties.find(key) != properties.end())
-        istringstream(properties.find(key)->second) >> ret;
-    return ret;
-}
-
 bool Properties::GetBool(string key, bool def) {
     bool ret = def;
     if (properties.find(key) != properties.end())

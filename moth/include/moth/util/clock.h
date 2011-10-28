@@ -8,11 +8,14 @@
 #ifndef CLOCK_H
 #define CLOCK_H
 
+#include <string>
+
 namespace moth {
 
 class Clock {
 public:
     static long long CurrentTime();
+    static std::string CurrentTimeString();
 };
 
 }/* namespace moth */

@@ -7,7 +7,7 @@ add_definitions(-g -Wall -std=c++0x)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-set(mothlog_lib_src src/moth/log/consolelogger.cpp src/moth/log/filelogger.cpp src/moth/log/filerollerlogger.cpp src/moth/log/logger.cpp src/moth/log/loggerfactory.cpp)
+set(mothlog_lib_src src/moth/log/consoleappender.cpp src/moth/log/fileappender.cpp src/moth/log/filerollerappender.cpp src/moth/log/logger.cpp src/moth/log/logappender.cpp)
 set(mothutil_lib_src src/moth/util/mothexception.cpp src/moth/util/tokenizer.cpp src/moth/util/properties.cpp src/moth/util/clock.cpp)
 set(moththread_lib_src src/moth/thread/thread.cpp src/moth/thread/mutex.cpp src/moth/thread/threadpool.cpp)
 set(mothnet_lib_src src/moth/net/socket.cpp)
