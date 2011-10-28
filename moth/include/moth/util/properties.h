@@ -22,7 +22,6 @@ public:
     int GetInt(std::string key, int def = 0);
     double GetDouble(std::string key, double def = 0.0);
     long long GetLong(std::string key, long long def = 0);
-    char GetChar(std::string key, char def = 0);
     bool GetBool(std::string key, bool def = false);
 
 private:

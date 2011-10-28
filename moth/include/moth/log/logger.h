@@ -14,6 +14,8 @@
 #include <moth/util/mothexception.h>
 #include <moth/thread/mutex.h>
 #include <moth/thread/runnable.h>
+#include <moth/util/properties.h>
+#include <moth/log/logappender.h>
 
 namespace moth {
 
@@ -24,28 +26,27 @@ private:
         void Run();
     private:
         bool running;
+        std::vector<LogAppender> appenders;
     };
 public:
     Logger(std::string classname);
     virtual ~Logger();
-    virtual void Info(std::string msg);
-    virtual void Info(std::string msg, MothException e);
-    virtual void Debug(std::string msg);
-    virtual void Debug(std::string msg, MothException e);
-    virtual void Warn(std::string msg);
-    virtual void Warn(std::string msg, MothException e);
-    virtual void Error(std::string msg);
-    virtual void Error(std::string msg, MothException e);
-protected:
-    std::string classname;
+    void Info(std::string msg);
+    void Info(std::string msg, MothException e);
+    void Debug(std::string msg);
+    void Debug(std::string msg, MothException e);
+    void Warn(std::string msg);
+    void Warn(std::string msg, MothException e);
+    void Error(std::string msg);
+    void Error(std::string msg, MothException e);
 
-    virtual std::string DateTime();
-    virtual void Write(std::string message) = 0;
+    static void Setup(Properties);
 private:
-    static std::vector<std::string> message_queue;
+    std::string classname;
+    static std::vector<LogAppender::LogMessage> message_queue;
     static Mutex message_queue_mutex;
 
-    void Queue(std::string message);
+    void Queue(LogAppender::LogMessage message);
 };
 
 } /* namespace moth */
