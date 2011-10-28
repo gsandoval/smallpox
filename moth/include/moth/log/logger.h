@@ -46,7 +46,7 @@ private:
     static std::vector<LogAppender::LogMessage> message_queue;
     static Mutex message_queue_mutex;
 
-    void Queue(LogAppender::LogMessage message);
+    void Queue(const LogAppender::LogMessage &);
 };
 
 } /* namespace moth */

@@ -12,10 +12,19 @@ namespace moth {
 class LogAppender {
 public:
     class LogMessage {
+    public:
+        LogMessage(std::string time, std::string message, std::string thread_name, std::string class_name, LogLevel level);
+        ~LogMessage();
+        std::string Time();
+        std::string Message();
+        std::string ThreadName();
+        std::string ClassName();
+        LogLevel Level();
+        std::string LevelString();
     private:
         std::string time_str;
         std::string message;
-        std::string thread;
+        std::string thread_name;
         std::string class_name;
         LogLevel level;
     };
