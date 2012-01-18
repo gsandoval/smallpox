@@ -7,7 +7,7 @@ namespace moth {
 
 class FileAppender : public LogAppender {
 public:
-    FileAppender(std::vector<std::string> class_list, LogLevel log_level);
+    FileAppender(std::vector<std::string> class_list, LogLevel log_level, std::string file_name);
     virtual ~FileAppender();
 
     void Write(LogMessage);

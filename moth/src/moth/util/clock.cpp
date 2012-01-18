@@ -29,7 +29,7 @@ long long Clock::CurrentTime() {
 #else
     timeval tv;
     gettimeofday(&tv, NULL);
-    m = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+    m = tv.tv_sec * 1000LL + tv.tv_usec / 1000;
 #endif
     return m;
 }

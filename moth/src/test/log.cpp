@@ -5,13 +5,15 @@
  *      Author: Guillermo Sandoval [gsandoval@darchitect.org]
  */
 
-#include <moth/log/loggerfactory.h>
+#include <moth/log/logger.h>
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
+    /*
     shared_ptr<moth::Logger> logger = moth::LoggerFactory::CreateLogger(__FILE__);
     logger->Error("Hello world");
+    */
     return 0;
 }
 

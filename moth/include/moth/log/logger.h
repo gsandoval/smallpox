@@ -10,6 +10,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #include <moth/util/mothexception.h>
 #include <moth/thread/mutex.h>
@@ -23,10 +24,13 @@ class Logger {
 private:
     class LogDequeuer : public Runnable {
     public:
+        LogDequeuer();
+        ~LogDequeuer();
         void Run();
+        void AddAppender(std::shared_ptr<LogAppender>);
     private:
         bool running;
-        std::vector<LogAppender> appenders;
+        std::vector<std::shared_ptr<LogAppender> > appenders;
     };
 public:
     Logger(std::string classname);
@@ -45,6 +49,7 @@ private:
     std::string classname;
     static std::vector<LogAppender::LogMessage> message_queue;
     static Mutex message_queue_mutex;
+    static LogDequeuer dequeuer;
 
     void Queue(const LogAppender::LogMessage &);
 };

@@ -11,7 +11,7 @@
 #include <moth/thread/thread.h>
 #include <moth/thread/threadpool.h>
 #include <moth/thread/runnable.h>
-#include <moth/log/loggerfactory.h>
+#include <moth/log/logger.h>
 
 using namespace std;
 
